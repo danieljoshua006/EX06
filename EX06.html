@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Cake Order Bill</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: url("bg1.jpg") no-repeat center center fixed;
+        background-size: cover;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+    }
+    header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(139, 69, 19, 0.85);
+        padding: 15px;
+    }
+    header img {
+        height: 60px;
+        width: 60px;
+        margin-right: 15px;
+        border-radius: 50%;
+        border: 2px solid white;
+    }
+    header h1 {
+        color: white;
+        margin: 0;
+        font-size: 28px;
+        font-family: Georgia, serif;
+        letter-spacing: 1px;
+    }
+    .container {
+        background: rgba(255, 255, 255, 0.95);
+        width: 90%;
+        max-width: 900px;
+        margin: 30px auto;
+        border-radius: 15px;
+        padding: 20px;
+        box-shadow: 0 0 15px rgba(0,0,0,0.5);
+        text-align: left;
+    }
+    h2 {
+        text-align: center;
+        color: brown;
+    }
+    .cakes {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+    .cake {
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        background: #fff;
+        padding: 10px;
+        text-align: center;
+    }
+    .cake img {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 10px;
+    }
+    .cake label {
+        font-weight: bold;
+        display: block;
+        margin: 5px 0;
+    }
+    .cake input {
+        width: 60px;
+        text-align: center;
+    }
+    .options, .customer, .date-box {
+        margin: 15px 0;
+    }
+    .options label, .customer label, .date-box label {
+        display: block;
+        margin: 5px 0;
+        font-weight: bold;
+    }
+    input[type="text"], input[type="tel"], textarea, input[type="date"] {
+        width: 95%;
+        padding: 8px;
+        margin-bottom: 10px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+    }
+    textarea {
+        resize: none;
+        height: 60px;
+    }
+    button {
+        display: block;
+        margin: 10px auto;
+        padding: 12px 25px;
+        background: brown;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+    button:hover {
+        background: darkred;
+    }
+    #bill {
+        margin-top: 20px;
+        padding: 15px;
+        background: #f9f4ec;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        font-size: 16px;
+    }
+    #bill h3 {
+        margin-top: 0;
+        color: green;
+        text-align: center;
+    }
+    #bill table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    #bill td {
+        padding: 5px;
+        vertical-align: top;
+    }
+    #bill td:first-child {
+        font-weight: bold;
+    }
+</style>
+</head>
+<body>
+
+<!-- ✅ Company Logo & Name -->
+<header>
+    <img src="logo.png" alt="Company Logo">
+    <h1>Sweet Delights Cake Shop</h1>
+</header>
+
+<div class="container">
+    <h2>🍰 Cake Order Form 🍰</h2>
+
+    <!-- ✅ Customer Details -->
+    <div class="customer">
+        <label for="custName">Customer Name:</label>
+        <input type="text" id="custName" placeholder="Enter your name">
+
+        <label for="custContact">Contact Number:</label>
+        <input type="tel" id="custContact" placeholder="Enter your phone number">
+
+        <label for="custAddress">Delivery Address:</label>
+        <textarea id="custAddress" placeholder="Enter delivery address"></textarea>
+    </div>
+
+    <!-- ✅ Cake Selection -->
+    <div class="cakes">
+        <div class="cake">
+            <img src="0001.jpg" alt="Chocolate Cake">
+            <label>Chocolate - ₹500</label>
+            Qty: <input type="number" id="cake1" value="0" min="0">
+        </div>
+        <div class="cake">
+            <img src="001.jpg" alt="Vanilla Cake">
+            <label>Vanilla - ₹450</label>
+            Qty: <input type="number" id="cake2" value="0" min="0">
+        </div>
+        <div class="cake">
+            <img src="002.jpg" alt="Red Velvet Cake">
+            <label>Red Velvet - ₹550</label>
+            Qty: <input type="number" id="cake3" value="0" min="0">
+        </div>
+        <div class="cake">
+            <img src="003.jpg" alt="Black Forest Cake">
+            <label>Black Forest - ₹600</label>
+            Qty: <input type="number" id="cake4" value="0" min="0">
+        </div>
+        <div class="cake">
+            <img src="004.jpg" alt="Strawberry Cake">
+            <label>Strawberry - ₹480</label>
+            Qty: <input type="number" id="cake5" value="0" min="0">
+        </div>
+        <div class="cake">
+            <img src="005.jpg" alt="Pineapple Cake">
+            <label>Pineapple - ₹470</label>
+            Qty: <input type="number" id="cake6" value="0" min="0">
+        </div>
+        <div class="cake">
+            <img src="006.jpg" alt="Butterscotch Cake">
+            <label>Butterscotch - ₹520</label>
+            Qty: <input type="number" id="cake7" value="0" min="0">
+        </div>
+        <div class="cake">
+            <img src="007.jpg" alt="Mango Cake">
+            <label>Mango - ₹490</label>
+            Qty: <input type="number" id="cake8" value="0" min="0">
+        </div>
+        <div class="cake">
+            <img src="008.jpg" alt="Blueberry Cake">
+            <label>Blueberry - ₹580</label>
+            Qty: <input type="number" id="cake9" value="0" min="0">
+        </div>
+        <div class="cake">
+            <img src="009.jpg" alt="Oreo Cake">
+            <label>Oreo - ₹530</label>
+            Qty: <input type="number" id="cake10" value="0" min="0">
+        </div>
+    </div>
+
+    <!-- ✅ Extras -->
+    <div class="options">
+        <h3>Extras:</h3>
+        <label><input type="checkbox" id="cream" value="50"> Extra Cream (+₹50)</label>
+        <label><input type="checkbox" id="candles" value="20"> Candles (+₹20)</label>
+        <label><input type="checkbox" id="name" value="30"> Name Printing (+₹30)</label>
+        <label><input type="checkbox" id="delivery" value="100"> Door Delivery (+₹100)</label>
+    </div>
+
+    <!-- ✅ Delivery Date -->
+    <div class="date-box">
+        <label for="deliveryDate">Select Delivery Date:</label>
+        <input type="date" id="deliveryDate">
+    </div>
+
+    <button id="generateBtn">Generate Bill</button>
+    <div id="bill"></div>
+</div>
+
+<!-- ✅ jQuery CDN -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("#generateBtn").click(function(){
+        let cakePrices = [500,450,550,600,480,470,520,490,580,530];
+        let subtotal = 0;
+
+        $(".cake input").each(function(index){
+            let qty = parseInt($(this).val()) || 0;
+            subtotal += cakePrices[index] * qty;
+        });
+
+        let addons = 0;
+        if($("#cream").is(":checked")) addons += 50;
+        if($("#candles").is(":checked")) addons += 20;
+        if($("#name").is(":checked")) addons += 30;
+        if($("#delivery").is(":checked")) addons += 100;
+
+        let total = subtotal + addons;
+
+        let name = $("#custName").val() || "Not Provided";
+        let contact = $("#custContact").val() || "Not Provided";
+        let address = $("#custAddress").val() || "Not Provided";
+        let date = $("#deliveryDate").val() || "Not Selected";
+
+        $("#bill").html(`
+            <h3>🧾 Customer Order Bill</h3>
+            <table>
+                <tr><td>Customer Name:</td><td>${name}</td></tr>
+                <tr><td>Contact Number:</td><td>${contact}</td></tr>
+                <tr><td>Address:</td><td>${address}</td></tr>
+                <tr><td>Delivery Date:</td><td>${date}</td></tr>
+                <tr><td>Subtotal:</td><td>₹${subtotal}</td></tr>
+                <tr><td>Add-ons:</td><td>₹${addons}</td></tr>
+                <tr><td><b>Total Amount:</b></td><td><b>₹${total}</b></td></tr>
+            </table>
+        `);
+    });
+});
+</script>
+</body>
+</html>
