@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GST Calculator</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f2f5;  /* Page background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .calculator {
+            background: url("h1.jpg") no-repeat center center; /* 👈 Local folder image */
+            background-size: cover;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 0px 25px rgba(0,0,0,0.4);
+            width: 380px;
+            text-align: center;
+        }
+        .overlay {
+            background: rgba(255,255,255,0.9); /* White overlay for text readability */
+            padding: 20px;
+            border-radius: 12px;
+        }
+        h2 {
+            margin-bottom: 20px;
+            color: #222;
+        }
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+            color: #333;
+        }
+        input, select {
+            width: 90%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #218838;
+        }
+        .reset-btn {
+            background: #dc3545;
+            margin-left: 10px;
+        }
+        .reset-btn:hover {
+            background: #c82333;
+        }
+        .result {
+            margin-top: 20px;
+            text-align: left;
+            font-size: 16px;
+            color: #000;
+        }
+        .result p {
+            margin: 8px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="calculator">
+        <div class="overlay">
+            <h2>GST Calculator</h2>
+            
+            <label for="amount">Enter Amount:</label>
+            <input type="number" id="amount" placeholder="Enter amount">
+
+            <label for="category">Select Category:</label>
+            <select id="category">
+                <option value="">--Select Category--</option>
+                <option value="0">Essential Goods (0%)</option>
+                <option value="5">Food & Groceries (5%)</option>
+                <option value="12">Clothing & Footwear (12%)</option>
+                <option value="18">Electronics (18%)</option>
+                <option value="28">Luxury Items (28%)</option>
+                <option value="40">Super Luxury (40%)</option>
+                <option value="custom">Custom GST %</option>
+            </select>
+
+            <input type="number" id="customRate" placeholder="Enter Custom GST %" style="display:none; margin-top:10px;">
+
+            <button id="calcBtn">Calculate GST</button>
+            <button class="reset-btn" id="resetBtn">Reset</button>
+
+            <div class="result" id="resultBox" style="display:none;">
+                <p><b>Actual Amount:</b> ₹ <span id="actualAmount"></span></p>
+                <p><b>GST Rate:</b> <span id="gstRateDisplay"></span>%</p>
+                <p><b>GST Amount:</b> ₹ <span id="gstAmount"></span></p>
+                <p><b>Total Amount:</b> ₹ <span id="totalAmount"></span></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function(){
+
+            // Show/hide custom GST input
+            $("#category").change(function(){
+                if($(this).val() === "custom"){
+                    $("#customRate").fadeIn();
+                } else {
+                    $("#customRate").fadeOut();
+                }
+            });
+
+            // Calculate GST
+            $("#calcBtn").click(function(){
+                let amount = parseFloat($("#amount").val());
+                let gstRate = $("#category").val();
+
+                if(isNaN(amount) || gstRate === ""){
+                    alert("⚠️ Please enter a valid amount and select a category!");
+                    return;
+                }
+
+                if(gstRate === "custom"){
+                    gstRate = parseFloat($("#customRate").val());
+                    if(isNaN(gstRate) || gstRate < 0){
+                        alert("⚠️ Please enter a valid custom GST rate!");
+                        return;
+                    }
+                } else {
+                    gstRate = parseFloat(gstRate);
+                }
+
+                let gstAmount = (amount * gstRate) / 100;
+                let totalAmount = amount + gstAmount;
+
+                $("#actualAmount").text(amount.toFixed(2));
+                $("#gstRateDisplay").text(gstRate.toFixed(2));
+                $("#gstAmount").text(gstAmount.toFixed(2));
+                $("#totalAmount").text(totalAmount.toFixed(2));
+
+                $("#resultBox").slideDown();
+            });
+
+            // Reset
+            $("#resetBtn").click(function(){
+                $("#amount").val("");
+                $("#category").val("");
+                $("#customRate").val("").hide();
+                $("#resultBox").slideUp();
+            });
+
+        });
+    </script>
+
+</body>
+</html>
